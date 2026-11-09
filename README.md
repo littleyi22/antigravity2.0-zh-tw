@@ -1,4 +1,21 @@
-# Antigravity 2.0 繁體中文套件
+﻿# Antigravity 2.0 繁體中文套件
+
+> ### 🚀 Antigravity 2.29+ 最新版最佳化安裝方法（奕鈞老師修復版）
+> 本版本特別針對 **Antigravity 2.29+** 介面全面繁體中文化（涵蓋主介面、設定、Agent 管理、MCP 知識庫、排程自動化等 1,058 筆詞彙）。
+> 
+> **🔧 本版本關鍵修復：**
+> 1. **修復強制閃退**：原官方安裝器會強制執行 	askkill 殺掉程序導致使用者正在進行的對話中斷，此版本解除強制中斷，在背景平滑注入。
+> 2. **自動補齊依賴**：原官方安裝包解壓至暫存區常因缺少 @electron/asar 導致中文化未成功寫入，此版本 install-win.bat 會自動偵測並補齊依賴。
+> 3. **極簡一鍵安裝**：下載後直接雙擊執行 install-win.bat，或在命令列執行：
+>    `ash
+>    git clone https://github.com/littleyi22/antigravity2.0-zh-tw.git
+>    cd antigravity2.0-zh-tw
+>    install-win.bat
+>    `
+>    安裝完成後，手動關閉並重新開啟 Antigravity 即可看到完整的臺灣繁體中文介面！
+> 
+> ---
+
 
 > **安裝方式選擇：**
 > - v1.0.12：傳統 zip / `npm install` / 腳本安裝流程。

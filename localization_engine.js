@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 const child_process = require('child_process');
 
@@ -730,7 +730,7 @@ function closeAntigravityProcesses() {
 
     try {
         if (process.platform === 'win32') {
-            child_process.execSync('taskkill /f /im Antigravity.exe /t >nul 2>nul');
+            // child_process.execSync('taskkill /f /im Antigravity.exe /t >nul 2>nul');
         } else {
             child_process.execSync('pkill -f Antigravity > /dev/null 2>&1');
         }
@@ -1101,3 +1101,4 @@ function main() {
 }
 
 main();
+

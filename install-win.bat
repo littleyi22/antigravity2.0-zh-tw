@@ -1,55 +1,60 @@
 @echo off
+chcp 65001 >nul
 REM ========================================================
-REM Antigravity 2.0 zh-Hant-TW package - install
+REM Antigravity 2.29+ zh-Hant-TW package - install
 REM ========================================================
-title Antigravity 2.0 zh-Hant-TW - Install
+title Antigravity 2.29+ 繁體中文套件安裝程式
 
 echo.
 echo ========================================================
-echo   Antigravity 2.0 zh-Hant-TW package
+echo   Antigravity 2.29+ 繁體中文（臺灣）中文化套件
 echo ========================================================
 echo.
 
-REM Check Node.js
-echo [Precheck] Checking Node.js...
+REM 檢查 Node.js
+echo [1/3 檢查環境] 正在檢查 Node.js...
 node -v >nul 2>nul
 if errorlevel 1 (
     echo.
-    echo [Error] Node.js is not available.
-    echo   Install Node.js LTS from https://nodejs.org/
-    echo   and make sure node is available in PATH.
-    echo   If Access Denied appears, reinstall Node.js and check PATH.
+    echo [錯誤] 找不到 Node.js！
+    echo   請先安裝 Node.js LTS：https://nodejs.org/
+    echo   安裝後請重新開啟此安裝程式。
     echo.
     pause
     exit /b 1
 )
 
-REM Check local @electron/asar
+REM 檢查並自動安裝 @electron/asar
 if not exist "%~dp0node_modules\@electron\asar\bin\asar.js" (
-    echo.
-    echo [Error] Local @electron/asar CLI was not found.
-    echo   Run this in the package root first:
-    echo     npm install
-    echo   Then run this install script again.
-    echo.
-    pause
-    exit /b 1
+    echo [準備依賴] 正在自動安裝 @electron/asar 工具...
+    call npm install --no-fund --no-audit
+    if errorlevel 1 (
+        echo.
+        echo [錯誤] npm install 失敗，請確認網路連線。
+        echo.
+        pause
+        exit /b 1
+    )
 )
 
-echo [Precheck] Node.js and asar CLI are ready.
 echo.
-
-echo [1/3] Closing Antigravity processes...
-taskkill /f /im Antigravity.exe /t >nul 2>nul
-timeout /t 2 /nobreak >nul
-
-echo.
-echo [2/3] Applying localization...
+echo [2/3 注入中文化] 正在套用 Antigravity 2.29+ 繁體中文語系...
 node "%~dp0localization_engine.js" %*
 
+if errorlevel 1 (
+    echo.
+    echo [錯誤] 中文化注入過程發生異常。
+    echo.
+    pause
+    exit /b 1
+)
+
 echo.
-echo [3/3] Done.
+echo ========================================================
+echo [3/3 安裝完成] Antigravity 2.29+ 繁體中文套件已成功套用！
 echo.
-echo [Note] Restart Antigravity manually to apply changes.
+echo [提示] 請手動重啟 Antigravity（關閉後重新開啟軟體），
+echo        開啟後即可看到完整的繁體中文介面。
+echo ========================================================
 echo.
 pause
